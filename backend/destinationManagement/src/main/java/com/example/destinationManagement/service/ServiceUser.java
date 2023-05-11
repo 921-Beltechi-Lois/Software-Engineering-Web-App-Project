@@ -33,8 +33,11 @@ public class ServiceUser {
                 .findFirst();
         if(userFound.isPresent()){
             loggedInUser = userFound.get();
+            System.out.println("LOGGED IN");
             return true;
         }
+        System.out.println("Unknown account");
+
         return false;
 
     }
