@@ -13,13 +13,11 @@ import lombok.NoArgsConstructor;
 public class Destination {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer destination_id;
+    private Integer destinationId;
 
     boolean isPrivate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    User added_by_user;
+    Integer userId;
 
     String title;
     String geo_location;
