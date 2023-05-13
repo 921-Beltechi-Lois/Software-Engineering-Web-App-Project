@@ -1,10 +1,11 @@
-import { Button, Card, CardActions, CardContent, IconButton, TextField } from "@mui/material";
+import { Button, Card, CardActions, CardContent, IconButton, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Destination } from "../Model/Destination";
 import axios from "axios";
+import Switch from "./Switch";
 
 
 
@@ -58,7 +59,20 @@ export const AddDestination = () => {
 						<ArrowBackIcon />
 					</IconButton>{" "}
 					<form onSubmit={addDestination}>
-						<TextField
+					<div style={{ display: "flex", alignItems: "center", marginBottom: 20 }}>
+              <div  style={{ width: 100, marginRight: 20, color: "grey", fontSize:20 }}>Is private?</div>
+              <Switch
+                isOn={destination.isPrivate}
+                handleToggle={() =>
+                  setDestinations({
+                    ...destination,
+                    isPrivate: !destination.isPrivate,
+                  })
+                }
+              />
+            </div>
+
+						{/* <TextField
 							id="isPrivate"
 							label="Is private?"
 							variant="outlined"
@@ -70,7 +84,7 @@ export const AddDestination = () => {
 								setDestinations({ ...destination, isPrivate: Boolean(event.target.value) });
 								setIsPrivateError(false);
 							}}
-						/>
+						/> */}
 						<TextField
 							id="title"
 							label="Title"
