@@ -15,6 +15,7 @@ import java.util.List;
 public class Destination {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="destination_id")
     private Integer destinationId;
 
     boolean isPrivate;

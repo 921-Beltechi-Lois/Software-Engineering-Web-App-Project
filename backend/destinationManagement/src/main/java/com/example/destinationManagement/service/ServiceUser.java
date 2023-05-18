@@ -61,7 +61,7 @@ public class ServiceUser {
 
         Destination newDestination = destination_repository.save(destination);
 
-        UserDestination newUserDestination = new UserDestination(loggedInUser.getUserId(),newDestination.getDestinationId(),stayDates);
+        UserDestination newUserDestination = new UserDestination(stayDates,loggedInUser,newDestination);
 
         user_destination_repository.save(newUserDestination);
 

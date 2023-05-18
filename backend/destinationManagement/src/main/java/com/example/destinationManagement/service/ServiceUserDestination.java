@@ -38,7 +38,7 @@ public class ServiceUserDestination {
         List<UserDestination> userDestinations = user_destination_repository.findAll();
         
         for (UserDestination userDestination : userDestinations) {
-            if (userDestination.getUserId() == user.getUserId()) { // User's all destinations
+            if (userDestination.getUser() == user) { // User's all destinations
                 // For current Destination of intermediate table, find this destination in Destination's table.. access to isPrivate
                 privateDestinations.add(userDestination.getDestination());
 

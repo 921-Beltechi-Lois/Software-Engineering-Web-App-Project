@@ -36,6 +36,7 @@ public class Controller {
     // Show private list
     @GetMapping("/api/userdestinations/{username}")
     List<Destination> getPrivateList(@PathVariable String username){
+        System.out.println(username);
         return serviceUserDestination.getPrivateDestinations(username);
 
     }
@@ -46,7 +47,7 @@ public class Controller {
         User loggedInUser =serviceUser.loggedInUser;
         Destination addedDestination = serviceDestination.add(newDestination,loggedInUser);
 
-        UserDestination userdestination = new UserDestination(loggedInUser.getUserId(),addedDestination.getDestinationId(),staydates);
+        UserDestination userdestination = new UserDestination(staydates,loggedInUser,addedDestination);
         serviceUserDestination.add(userdestination);
 
         return addedDestination;

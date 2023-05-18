@@ -15,23 +15,21 @@ public class UserDestination {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer userDestinationId;
 
-    Integer userId;
-    Integer destinationId;
     Integer stayDates;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "destination_id")
     @JsonIgnore
     Destination destination;
 
-    public UserDestination(Integer userId, Integer destinationId, Integer stayDates) {
-        this.userId = userId;
-        this.destinationId = destinationId;
+    public UserDestination(Integer stayDates, User user, Destination destination) {
         this.stayDates = stayDates;
+        this.user = user;
+        this.destination = destination;
     }
 }
