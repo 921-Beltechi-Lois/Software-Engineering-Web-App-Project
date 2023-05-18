@@ -8,6 +8,7 @@ import Login from './components/LogIn'
 import { AddDestination } from './components/AddDestination';
 import { DestinationsShowAll } from './components/ViewPublicDestination';
 import { DestinationsShowAllPrivate } from './components/ViewPrivateDestinations';
+import { AddDestinationAdmin } from './components/AddDestinationAdmin';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/addDestination" element={<AddDestination />} />
+        <Route path="/addDestinationAdmin" element={<AddDestinationAdmin />} />
+
         <Route path = "/destinations" element = {<DestinationsShowAll/>}/>
         <Route path= "/privatedestinations" element = {<DestinationsShowAllPrivate/>}/>
   
