@@ -8,7 +8,6 @@ import com.example.destinationManagement.repository.IRepositoryUser;
 import com.example.destinationManagement.repository.IRepositoryUserDestination;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +71,10 @@ public class ServiceUser {
 
     public boolean isAdmin() {
         return loggedInUser.isAdmin();
+    }
+
+    public String getLoggedInUsername() {
+        return loggedInUser.getUsername();
     }
 
 

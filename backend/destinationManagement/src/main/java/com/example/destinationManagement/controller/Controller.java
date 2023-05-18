@@ -68,6 +68,10 @@ public class Controller {
         return serviceUser.isAdmin();
     }
 
+    @GetMapping("/api/loggedusername")
+    String getLoggedInUsername(){
+        return serviceUser.getLoggedInUsername();
+    }
 
 //    @PostMapping("/api/userdestination")
 //    UserDestination addUserDestination(@RequestBody UserDestination newUserDestination){
