@@ -1,9 +1,12 @@
 package com.example.destinationManagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +21,9 @@ public class User {
     String username;
     String  password;
     String email;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<UserDestination> userDestinations;
 
     public User(boolean isAdmin, String username, String password, String email) {
         this.isAdmin = isAdmin;

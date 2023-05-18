@@ -1,9 +1,7 @@
 package com.example.destinationManagement.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,16 @@ public class UserDestination {
     Integer userId;
     Integer destinationId;
     Integer stayDates;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    Destination destination;
 
     public UserDestination(Integer userId, Integer destinationId, Integer stayDates) {
         this.userId = userId;

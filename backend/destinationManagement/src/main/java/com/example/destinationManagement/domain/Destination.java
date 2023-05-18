@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Data
@@ -23,6 +25,9 @@ public class Destination {
     String geo_location;
     String description;
     String image;
+
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<UserDestination> userDestinations;
 
     public Destination(boolean isPrivate, Integer userId, String title, String geo_location, String description, String image) {
         this.isPrivate = isPrivate;
