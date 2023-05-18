@@ -2,32 +2,41 @@ package com.example.destinationManagement.service;
 
 import com.example.destinationManagement.domain.Destination;
 import com.example.destinationManagement.domain.User;
+import com.example.destinationManagement.domain.UserDestination;
 import com.example.destinationManagement.repository.IRepositoryDestination;
 import com.example.destinationManagement.repository.IRepositoryUser;
+import com.example.destinationManagement.repository.IRepositoryUserDestination;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ServiceDestination {
 
     private final IRepositoryDestination destination_repository;
     private final IRepositoryUser user_repository;
+    private final IRepositoryUserDestination user_destination_repository;
 
 
-    public ServiceDestination(IRepositoryDestination destination_repository, IRepositoryUser user_repository) {
+
+    public ServiceDestination(IRepositoryDestination destination_repository, IRepositoryUser user_repository, IRepositoryUserDestination user_destination_repository) {
         this.destination_repository = destination_repository;
         this.user_repository = user_repository;
+        this.user_destination_repository = user_destination_repository;
     }
 
 
-//    public Destination add(Destination newDestination) {
-//        return destination_repository.save(newDestination);
-//    }
+    public Destination add(Destination newDestination, User loggedInUser) {
+        newDestination.setUserId(loggedInUser.getUserId());
+        return destination_repository.save(newDestination);
+    }
+
+    public List<Destination> getAllDestinations() {
+        return destination_repository.findAll();
+    }
+
+
 //
 //    public void remove(int destination_id) {
 //        destination_repository.deleteById(destination_id);

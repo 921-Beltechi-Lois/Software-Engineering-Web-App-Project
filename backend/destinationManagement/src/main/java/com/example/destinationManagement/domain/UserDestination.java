@@ -21,5 +21,9 @@ public class UserDestination {
     Integer destinationId;
     Integer stayDates;
 
-
+    public UserDestination(Integer userId, Integer destinationId, Integer stayDates) {
+        this.userId = userId;
+        this.destinationId = destinationId;
+        this.stayDates = stayDates;
+    }
 }

@@ -1,7 +1,11 @@
 package com.example.destinationManagement.service;
 
+import com.example.destinationManagement.domain.Destination;
 import com.example.destinationManagement.domain.User;
+import com.example.destinationManagement.domain.UserDestination;
+import com.example.destinationManagement.repository.IRepositoryDestination;
 import com.example.destinationManagement.repository.IRepositoryUser;
+import com.example.destinationManagement.repository.IRepositoryUserDestination;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,9 +15,17 @@ import java.util.Optional;
 @Service
 public class ServiceUser {
     private final IRepositoryUser user_repository;
+    private final IRepositoryDestination destination_repository;
 
-    private User loggedInUser;
+    private final IRepositoryUserDestination user_destination_repository;
 
+    public User loggedInUser;
+
+    public ServiceUser(IRepositoryUser user_repository, IRepositoryDestination destination_repository, IRepositoryUserDestination user_destination_repository) {
+        this.user_repository = user_repository;
+        this.destination_repository = destination_repository;
+        this.user_destination_repository = user_destination_repository;
+    }
     public boolean logInUser(String userName, String password){
         List<User> usersList = user_repository.findAll();
         Optional<User> userFound = usersList.stream()
@@ -21,24 +33,51 @@ public class ServiceUser {
                 .findFirst();
         if(userFound.isPresent()){
             loggedInUser = userFound.get();
+            System.out.println("LOGGED IN");
             return true;
         }
+        System.out.println("Unknown account");
+
         return false;
 
     }
 
-    public ServiceUser(IRepositoryUser user_repository) {
-        this.user_repository = user_repository;
-    }
+
 
     public User add(User newUser) {
         newUser = user_repository.save(newUser);
         return newUser;
     }
 
-    public void remove(Integer user_id) {
-        user_repository.deleteById(user_id);
+
+
+
+
+    public Destination addDestination(Destination destination, Integer stayDates){
+        destination.setUserId(loggedInUser.getUserId());
+        if(!loggedInUser.isAdmin() && !destination.isPrivate()){ // user, public list
+            throw new RuntimeException("User cannot add in public list!");
+        }
+
+        Destination newDestination = destination_repository.save(destination);
+
+        UserDestination newUserDestination = new UserDestination(loggedInUser.getUserId(),newDestination.getDestinationId(),stayDates);
+
+        user_destination_repository.save(newUserDestination);
+
+
+        return newDestination;
+
     }
+
+
+
+
+
+//    public void remove(Integer user_id) {
+//        user_repository.deleteById(user_id);
+//    }
+
 
 //    public User update(User newUser, Integer id) {
 //        return user_repository.findById(id)

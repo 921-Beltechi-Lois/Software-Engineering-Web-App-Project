@@ -11,6 +11,8 @@ public class DestinationNotFoundException extends RuntimeException {
     public DestinationNotFoundException(Integer id) {
         super("Could not find Destination " + id);
     }
+
+
 }
 
 @ControllerAdvice

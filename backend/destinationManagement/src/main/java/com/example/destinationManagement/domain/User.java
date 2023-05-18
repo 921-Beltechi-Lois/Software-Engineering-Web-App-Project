@@ -19,4 +19,11 @@ public class User {
     String  password;
     String email;
 
+    public User(boolean isAdmin, String username, String password, String email) {
+        this.isAdmin = isAdmin;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 }
+

@@ -24,4 +24,12 @@ public class Destination {
     String description;
     String image;
 
+    public Destination(boolean isPrivate, Integer userId, String title, String geo_location, String description, String image) {
+        this.isPrivate = isPrivate;
+        this.userId = userId;
+        this.title = title;
+        this.geo_location = geo_location;
+        this.description = description;
+        this.image = image;
+    }
 }
