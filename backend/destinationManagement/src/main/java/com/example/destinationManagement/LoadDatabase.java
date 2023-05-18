@@ -27,8 +27,8 @@ class LoadDatabase {
             log.info("Preloading " + user_repository.save(new User(true,"catalina","0000","arbacatalina@yahoo.com")));
             log.info("Preloading " + user_repository.save(new User(false,"lois","0000","lois@yahoo.com")));
 
-            log.info("Preloading "+destination_repository.save(new Destination(true,1, "Viseul de Sus","10.22.78","Frumos","img1.jpg")));
-            log.info("Preloading "+destination_repository.save(new Destination(false,1, "Maldive","10.25.78","Scump","img3.jpg")));
+            log.info("Preloading "+destination_repository.save(new Destination(true,1, "Viseul de Sus","10.22.78","Frumos","https://img.directbooking.ro/getimage.ashx?f=statiuni&file=Statiune_45a6e98f-02b4-4c3f-b55d-9317d2cea6ca.jpg")));
+            log.info("Preloading "+destination_repository.save(new Destination(false,1, "Maldive","10.25.78","Scump","https://www.aerocenter.ro/LocationFileHandler/1200/1200/maldive-kuramathi-2134.jpg")));
 
 
             log.info("Preloading"+ user_destination_repository.save(new UserDestination(1,1,3)));

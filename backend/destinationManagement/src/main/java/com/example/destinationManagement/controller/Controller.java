@@ -33,9 +33,9 @@ public class Controller {
 
 
     // getAllUserDestinations from UserDestination
-    @GetMapping("/api/userdestinations/{userId}")
-    List<Destination> getAllUserDestinations(@PathVariable Integer userId){
-        return serviceUserDestination.getAllUserDestinations(userId);
+    @GetMapping("/api/userdestinations/{username}")
+    List<Destination> getAllUserDestinations(@PathVariable String username){
+        return serviceUserDestination.getAllUserDestinations(username);
 
     }
 
@@ -55,6 +55,12 @@ public class Controller {
 
         return addedDestination;
     }
+
+    @GetMapping("/api/destinations")
+    List<Destination> getAllDestinations(){
+        return serviceDestination.getAllDestinations();
+    }
+
 
 //    @PostMapping("/api/userdestination")
 //    UserDestination addUserDestination(@RequestBody UserDestination newUserDestination){
