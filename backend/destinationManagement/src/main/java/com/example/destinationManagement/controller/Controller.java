@@ -24,6 +24,7 @@ public class Controller {
         this.serviceUserDestination = serviceUserDestination;
     }
 
+    //Log in function
     @GetMapping("/api/login/{username}/{password}")
     boolean logIn(@PathVariable String username, @PathVariable String password){
         return serviceUser.logInUser(username,password);
@@ -32,19 +33,14 @@ public class Controller {
 
 
 
-    // getAllUserDestinations from UserDestination
+    // Show private list
     @GetMapping("/api/userdestinations/{username}")
-    List<Destination> getAllUserDestinations(@PathVariable String username){
-        return serviceUserDestination.getAllUserDestinations(username);
+    List<Destination> getPrivateList(@PathVariable String username){
+        return serviceUserDestination.getPrivateDestinations(username);
 
     }
 
-    @PostMapping("/api/user")
-    User addUser(@RequestBody User newUser){
-        return serviceUser.add(newUser);
-
-    }
-
+    //Add destination: private or public destination
     @PostMapping("/api/destination/{staydates}")
     Destination addDestination(@RequestBody Destination newDestination,@PathVariable Integer staydates){
         User loggedInUser =serviceUser.loggedInUser;
@@ -56,9 +52,11 @@ public class Controller {
         return addedDestination;
     }
 
+    //Show public list
     @GetMapping("/api/destinations")
-    List<Destination> getAllDestinations(){
-        return serviceDestination.getAllDestinations();
+    List<Destination> getPublicList(){
+
+        return serviceDestination.getPublicList();
     }
 
 
