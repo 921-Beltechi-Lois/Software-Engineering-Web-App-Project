@@ -19,7 +19,6 @@ public class ServiceDestination {
     private final IRepositoryUserDestination user_destination_repository;
 
 
-
     public ServiceDestination(IRepositoryDestination destination_repository, IRepositoryUser user_repository, IRepositoryUserDestination user_destination_repository) {
         this.destination_repository = destination_repository;
         this.user_repository = user_repository;
@@ -32,9 +31,15 @@ public class ServiceDestination {
         return destination_repository.save(newDestination);
     }
 
-    public List<Destination> getAllDestinations() {
-        return destination_repository.findAll();
+    public List<Destination> getPublicList() {
+        List<Destination> destinationList = destination_repository.findAll();
+        for (Destination destination : destinationList) {
+            if (destination.isPrivate())
+                destinationList.remove(destination);
+        }
+        return destinationList;
     }
+
 
 
 //

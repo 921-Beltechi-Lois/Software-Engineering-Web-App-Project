@@ -31,22 +31,16 @@ public class ServiceUserDestination {
     }
 
 
-    public List<Destination> getAllUserDestinations(String userName) {
+    public List<Destination> getPrivateDestinations(String userName) {
         List<Destination> privateDestinations = new ArrayList<>();
 
         User user = user_repository.findByUsername(userName);
         List<UserDestination> userDestinations = user_destination_repository.findAll();
-        List<Destination> allDestinations = destination_repository.findAll();
-
-
+        
         for (UserDestination userDestination : userDestinations) {
             if (userDestination.getUserId() == user.getUserId()) { // User's all destinations
                 // For current Destination of intermediate table, find this destination in Destination's table.. access to isPrivate
-                for(Destination destination: allDestinations){
-                    if(destination.getDestinationId() == userDestination.getDestinationId()){
-                        privateDestinations.add(destination);
-                    }
-                }
+                privateDestinations.add(userDestination.getDestination());
 
             }
         }
