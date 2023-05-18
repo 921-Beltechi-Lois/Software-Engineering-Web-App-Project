@@ -37,6 +37,7 @@ public class Controller {
     @GetMapping("/api/userdestinations/{username}")
     List<Destination> getPrivateList(@PathVariable String username){
         System.out.println(username);
+        /// !!!!!!!!!!
         return serviceUserDestination.getPrivateDestinations(username);
 
     }
