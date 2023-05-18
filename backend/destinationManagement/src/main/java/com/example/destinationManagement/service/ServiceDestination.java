@@ -32,6 +32,9 @@ public class ServiceDestination {
         return destination_repository.save(newDestination);
     }
 
+    public List<Destination> getAllDestinations() {
+        return destination_repository.findAll();
+    }
 
 
 //
