@@ -70,8 +70,9 @@ public class ServiceUser {
 
     }
 
-
-
+    public boolean isAdmin() {
+        return loggedInUser.isAdmin();
+    }
 
 
 //    public void remove(Integer user_id) {

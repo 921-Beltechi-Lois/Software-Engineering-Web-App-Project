@@ -1,5 +1,7 @@
 package com.example.destinationManagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Destination {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,6 +31,7 @@ public class Destination {
     String image;
 
     @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<UserDestination> userDestinations;
 
     public Destination(boolean isPrivate, Integer userId, String title, String geo_location, String description, String image) {

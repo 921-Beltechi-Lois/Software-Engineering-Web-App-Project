@@ -36,6 +36,7 @@ public class ServiceDestination {
         for (Destination destination : destinationList) {
             if (destination.isPrivate())
                 destinationList.remove(destination);
+                System.out.println(destination.getTitle());
         }
         return destinationList;
     }

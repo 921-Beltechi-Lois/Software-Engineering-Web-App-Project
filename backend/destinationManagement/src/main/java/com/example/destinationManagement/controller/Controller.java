@@ -48,8 +48,10 @@ public class Controller {
         User loggedInUser =serviceUser.loggedInUser;
         Destination addedDestination = serviceDestination.add(newDestination,loggedInUser);
 
-        UserDestination userdestination = new UserDestination(staydates,loggedInUser,addedDestination);
-        serviceUserDestination.add(userdestination);
+        if(staydates!=-1) { // User wants to add it to its private list by giving > 0 StayDates
+            UserDestination userdestination = new UserDestination(staydates, loggedInUser, addedDestination);
+            serviceUserDestination.add(userdestination);
+        }
 
         return addedDestination;
     }
@@ -59,6 +61,11 @@ public class Controller {
     List<Destination> getPublicList(){
 
         return serviceDestination.getPublicList();
+    }
+
+    @GetMapping("/api/isAdmin")
+    boolean isAdmin(){
+        return serviceUser.isAdmin();
     }
 
 

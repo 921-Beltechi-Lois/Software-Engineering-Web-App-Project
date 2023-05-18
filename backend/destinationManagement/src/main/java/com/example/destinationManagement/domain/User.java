@@ -24,6 +24,7 @@ public class User {
     String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<UserDestination> userDestinations;
 
     public User(boolean isAdmin, String username, String password, String email) {
