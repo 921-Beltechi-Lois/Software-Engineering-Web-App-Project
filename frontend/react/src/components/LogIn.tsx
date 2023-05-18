@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent, Container, TextField } from "@mui/material";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 const Login = () => {
  
@@ -10,8 +10,9 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginAttempts, setLoginAttempts] = useState(0);
-
-
+  const [loggedInUsername, setLoggedInUsername] = useState("");
+  //const [redirectToPrivate, setRedirectToPrivate] = useState(false);
+  
 
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -22,11 +23,20 @@ const Login = () => {
       .then((response) => {
         return response.text();
       })
-      .then((data) => {
+      .then(async (data) => {
         if (data === "true") {
           console.log("Login successful!");
           try{
-          navigate('/home');
+            setLoggedInUsername(username); // set the logged-in user's username
+            const isAdmin = await axios.get(`http://localhost:8080/api/isAdmin`);
+            console.log(isAdmin.data);
+            
+            if(!isAdmin.data)
+            {
+              navigate('/privatedestinations', { state: { loggedInUsername: username } });
+            }
+            else{navigate('/destinations');}
+            
           } catch(error){
             console.log(error);
           }
