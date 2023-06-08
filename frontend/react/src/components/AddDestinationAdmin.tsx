@@ -35,6 +35,11 @@ export const AddDestinationAdmin = () => {
   const [geoLocationError, setGeoLocationError] = useState(false);
   const [staydates, setStaydates] = useState(0);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+
+
 
   const handleStayDatesChange = (
     event: React.ChangeEvent<HTMLInputElement>

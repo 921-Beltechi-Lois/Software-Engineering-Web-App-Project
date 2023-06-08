@@ -73,11 +73,6 @@ public class Controller {
         return serviceUser.getLoggedInUsername();
     }
 
-//    @PostMapping("/api/userdestination")
-//    UserDestination addUserDestination(@RequestBody UserDestination newUserDestination){
-//        return serviceUserDestination.add(newUserDestination);
-//
-//    }
 
 
 }

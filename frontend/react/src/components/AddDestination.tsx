@@ -35,11 +35,18 @@ export const AddDestination = () => {
   const [geoLocationError, setGeoLocationError] = useState(false);
   const [staydates, setStaydates] = useState(0);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
-  const handleStayDatesChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setStaydates(parseInt(event.target.value));
+
+
+  const handleStayDatesChange = (event: { target: { value: string; }; }) => {
+	const value = parseInt(event.target.value);
+	if (Number.isNaN(value) || value <= 0) {
+	  setStaydates(0);
+	} else {
+	  setStaydates(value);
+	}
   };
 
   const handleToggle = () => {
@@ -62,6 +69,15 @@ export const AddDestination = () => {
       setGeoLocationError(true);
       return;
     }
+
+	if (destination.description === "") {
+		setDescriptionError(true);
+		return;
+	  }
+	  if (!destination.image.match(/^http.*\.jpg$/)) {
+		setImageError(true);
+		return;
+	  }
     try {
       await axios.post(
         `http://localhost:8080/api/destination/${staydates}`,
@@ -72,6 +88,8 @@ export const AddDestination = () => {
       console.log(error);
     }
   };
+
+  
 
   return (
     <Container>
@@ -146,11 +164,15 @@ export const AddDestination = () => {
               variant="outlined"
               fullWidth
               sx={{ mb: 2 }}
-              onChange={(event) =>
+			  error={descriptionError}
+  				helperText={descriptionError ? "Description cannot be empty" : ""}
+              onChange={(event) =>{
                 setDestinations({
                   ...destination,
                   description: event.target.value,
                 })
+				setDescriptionError(false);}
+
               }
             />
 
@@ -160,11 +182,15 @@ export const AddDestination = () => {
               variant="outlined"
               fullWidth
               sx={{ mb: 2 }}
-              onChange={(event) =>
+			  error={imageError}
+  helperText={imageError ? "Image has to be a valid link" : ""}
+              onChange={(event) =>{
                 setDestinations({
                   ...destination,
                   image: event.target.value,
                 })
+				setImageError(false);}
+
               }
             />
 
