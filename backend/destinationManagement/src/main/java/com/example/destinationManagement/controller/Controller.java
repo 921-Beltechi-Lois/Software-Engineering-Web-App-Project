@@ -48,7 +48,7 @@ public class Controller {
         User loggedInUser =serviceUser.loggedInUser;
         Destination addedDestination = serviceDestination.add(newDestination,loggedInUser);
 
-        if(staydates!=-1) { // User wants to add it to its private list by giving > 0 StayDates
+        if(staydates!=0) { // User wants to add it to its private list by giving > 0 StayDates
             UserDestination userdestination = new UserDestination(staydates, loggedInUser, addedDestination);
             serviceUserDestination.add(userdestination);
         }

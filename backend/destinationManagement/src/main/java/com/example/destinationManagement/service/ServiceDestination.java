@@ -9,6 +9,7 @@ import com.example.destinationManagement.repository.IRepositoryUserDestination;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -31,13 +32,30 @@ public class ServiceDestination {
         return destination_repository.save(newDestination);
     }
 
+//    public List<Destination> getPublicList() {
+//        List<Destination> destinationList = destination_repository.findAll();
+//        for (Destination destination : destinationList) {
+//            if (destination.isPrivate())
+//                destinationList.remove(destination);
+//                System.out.println(destination.getTitle());
+//        }
+//        return destinationList;
+//    }
+
     public List<Destination> getPublicList() {
         List<Destination> destinationList = destination_repository.findAll();
-        for (Destination destination : destinationList) {
-            if (destination.isPrivate())
-                destinationList.remove(destination);
+        Iterator<Destination> iterator = destinationList.iterator();
+
+        while (iterator.hasNext()) {
+            Destination destination = iterator.next();
+
+            if (destination.isPrivate()) {
+                iterator.remove(); // Safely remove the element using the iterator
+            } else {
                 System.out.println(destination.getTitle());
+            }
         }
+
         return destinationList;
     }
 

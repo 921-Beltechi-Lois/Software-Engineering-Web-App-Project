@@ -35,12 +35,16 @@ class LoadDatabase {
             log.info("Preloading "+destination_repository.save(destination2));
 
 
-            UserDestination userDestination1=new UserDestination(3,user1,destination1);
-            UserDestination userDestination2=new UserDestination(4,user1,destination2);
+            UserDestination userDestination1=new UserDestination(3,user2,destination1);
             UserDestination userDestination3=new UserDestination(5,user2,destination2);
 
+            //Public: Maldive si Mamaia
+
+            //https://www.antena3.ro/thumbs/big3/2014/08/26/radu-mazare-ar-putea-fi-cel-care-da-stele-hotelurilor-din-mamaia-272932.jpg
+            //Litoral romanesc superb
+
             log.info("Preloading"+ user_destination_repository.save(userDestination1));
-            log.info("Preloading"+ user_destination_repository.save(userDestination2));
+            //log.info("Preloading"+ user_destination_repository.save(userDestination2));
             log.info("Preloading"+ user_destination_repository.save(userDestination3));
 
 

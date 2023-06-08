@@ -23,6 +23,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
 // import { BACKEND_API_URL } from "../../constants";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 import { Destination } from "../Model/Destination";
 import axios from "axios";
 
@@ -34,18 +36,12 @@ export const DestinationsShowAll = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isAdmin, setAdmin] = useState(true);
 
-  // useEffect(() => {
-  //   if (page === 1) getLocations();
-  //   else setPage(1);
-  // }, [pageSize]);
-
-
   const fetchAdminStatus = useCallback(async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/isAdmin");
       const isAdmin = response;
       setAdmin(isAdmin.data);
-      console.log("Admin="+isAdmin.data);
+      console.log("Admin=" + isAdmin.data);
     } catch (error) {
       console.log(error);
     }
@@ -53,10 +49,7 @@ export const DestinationsShowAll = () => {
 
   useEffect(() => {
     setLoading(true);
-   fetchAdminStatus();
-
-
-
+    fetchAdminStatus();
 
     const fetchDestinations = () => {
       fetch(`http://localhost:8080/api/destinations`)
@@ -75,20 +68,6 @@ export const DestinationsShowAll = () => {
     setOpen(false);
   };
 
-  //   const sortClients = () => {
-  //       const sortedClients = [...destinations].sort((a: ClientsDTO, b: ClientsDTO) => {
-  //           if (a.lname < b.lname) {
-  //               return -1;
-  //           }
-  //           if (a.lname > b.lname) {
-  //               return 1;
-  //           }
-  //           return 0;
-  //       })
-  //       console.log(sortedClients);
-  //       setDestinations(sortedClients);
-  //   }
-
   return (
     <Container>
       <h1 style={{ marginTop: "65px" }}>All Destinations</h1>
@@ -97,8 +76,7 @@ export const DestinationsShowAll = () => {
 
       {!loading && destinations.length == 0 && <div>No clients found</div>}
 
-
-      {!loading && isAdmin &&(
+      {!loading && isAdmin && (
         <IconButton component={Link} sx={{ mr: 3 }} to={`/addDestinationAdmin`}>
           <Tooltip title="Add a new public destination" arrow>
             <PersonAddAlt1Icon
@@ -108,8 +86,7 @@ export const DestinationsShowAll = () => {
         </IconButton>
       )}
 
-
-      {!loading && !isAdmin &&(
+      {!loading && !isAdmin && (
         <IconButton component={Link} sx={{ mr: 3 }} to={`/addDestination`}>
           <Tooltip title="Add a new public destination" arrow>
             <PersonAddAlt1Icon
@@ -119,12 +96,16 @@ export const DestinationsShowAll = () => {
         </IconButton>
       )}
 
-     
-      {/* {!loading && (
-              <Button sx={{color:"black"}} onClick={sortClients} >
-                  Sort clients
-              </Button>
-          )} */}
+      {!loading && !isAdmin && (
+        <Button
+          component={Link}
+          to={`/privatedestinations`}
+          variant="contained"
+          color="primary"
+        >
+          View Private List
+        </Button>
+      )}
 
       {!loading && destinations.length > 0 && (
         <>
@@ -194,37 +175,16 @@ export const DestinationsShowAll = () => {
                     <TableCell align="center">
                       {destination.description}
                     </TableCell>
-                    <TableCell align="center">{destination.image}</TableCell>
-                    {/* <img
-                                    //src={destination.image}
-                                    alt={destination.title}
-                                    // style={{
-                                    //     display: 'block',
-                                    //     margin: 'auto',
-                                    //     maxWidth: '90vw',
-                                    //     maxHeight: '90vh',
-                                    //   }}
-                                    onClick={() => {
-                                        setSelectedImage(destination.image);
-                                        setOpen(true);
-                                    }}
-                                    />
-                                    <Modal
-                                    open={!!destination.image}
-                                    onClose={handleClose}
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}
-                                    >
-                                    <img
-                                        src={destination.image}
-                                        alt={destination.title}
-                                        style={{ maxWidth: "90vw", maxHeight: "90vh" }}
-                                    />
-                                    </Modal>
-                                </TableCell> */}
+                    <TableCell align="center" style={{ width: "40%" }}>
+                      {
+                        <img
+                          src={destination.image}
+                          alt="new"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      }
+                    </TableCell>
+
                     <TableCell align="center">
                       <IconButton
                         component={Link}

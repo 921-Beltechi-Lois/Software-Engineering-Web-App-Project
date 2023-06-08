@@ -7,7 +7,6 @@ export const AppMenu = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const path = location.pathname;
-    const { loggedInUsername: username } = location.state;
 
 
 	return (
